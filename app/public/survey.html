@@ -1,0 +1,229 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Anime Finder</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="home.html">Anime Finder</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="survey.html">Questionnaire</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="container">
+
+    <form>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label for="user_name">Username:</label>
+          <input type="text" class="form-control" id="user_name" placeholder="First name" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <!-- I COULD PAIR USERS TOGETHER IF THEIR GENRE MATCHES -->
+        <!-- MAYBE PHASE II. -->
+        <!-- SERVE THEM THE PAIRE GENRE AND AN IMAGE OF THE PEOPLE WHO ALSO GOT PAIRED WITH GENRE -->
+        <!-- <div class="col-md-8 mb-3">
+          <label for="pic_url">Image URL</label>
+          <input type="text" class="form-control" id="pic_url" placeholder="Last name" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div> -->
+      </div>
+      <!-- Question 1 -->
+      <select class="custom-select" id="q1">
+        <option selected>How much anime have you watched previously?</option>
+        <option value="1">1 (little to none)</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 (quite a bit)</option>
+      </select>
+      <br><br>
+      <!-- Question 2 -->
+      <select class="custom-select" id="q2">
+        <option selected>How open are you to new ideas?</option>
+        <option value="1">1 (not at all)</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 (whatcha got?)</option>
+      </select>
+      <br><br>
+      <!-- Question 3 -->
+      <select class="custom-select" id="q3">
+        <option selected>Do you enjoy conflict?</option>
+        <option value="1">1 (I don't)</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 (I live for conflict)</option>
+      </select>
+      <br><br>
+      <!-- Question 4 -->
+      <select class="custom-select" id="q4">
+        <option selected>How likely are you to react to a cute doggo?</option>
+        <option value="1">1 (not likely)</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 (KAWAII! I LOVE CUTE DOGGOS SO MUCH!)</option>
+      </select>
+      <br><br>
+      <!-- Question 5 -->
+      <select class="custom-select" id="q5">
+        <option selected>Do violent shows inspire violence?</option>
+        <option value="1">1 (disagree)</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 (agree)</option>
+      </select>
+      <br><br>
+      <!-- Question 6 -->
+      <select class="custom-select" id="q6">
+        <option selected>How engaged are you when watching a show?</option>
+        <option value="1">1 (not at all, its background noise)</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 (there is no talking or doing, just watching)</option>
+      </select>
+      <br><br>
+      <!-- Question 7 -->
+      <select class="custom-select" id="q7">
+        <option selected>Are you easily affected by other's emotions?</option>
+        <option value="1">1 (what are emotions?)</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 (EMOTIONAL WRECK)</option>
+      </select>
+      <br><br>
+      <!-- Question 8 -->
+      <select class="custom-select" id="q8">
+        <option selected>How much are you willing to think during a show?</option>
+        <option value="1">1 (not at all)</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 (give me cerebral stimulation or give me death)</option>
+      </select>
+      <br><br>
+      <!-- Question 9 -->
+      <select class="custom-select" id="q9">
+        <option selected>Are you interested in sports?</option>
+        <option value="1">1 (not at all)</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 (very much so)</option>
+      </select>
+      <br><br>
+      <!-- Question 10 -->
+      <select class="custom-select" id="q10">
+        <option selected>Science & Technology: how accurate should this be in a show?</option>
+        <option value="1">1 (why get caught up on the details?)</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 (very accurate)</option>
+      </select>
+      <br><br>
+
+
+      <button type="submit" class="btn btn-primary" id="submit_Q">Submit</button>
+    </form>
+
+  </div>
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" id="match_found"></h4>
+        </div>
+        <div class="modal-body">
+          <div id="match_picture">
+
+
+          </div>
+          <div id="match_info">
+
+          </div>
+          <div id="match_link">
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    $("#submit_Q").on("click", function (e) {
+      e.preventDefault();
+
+      let score_arr = [];
+
+      for (let i = 0; i < 10; i++) {
+        score_arr.push($());
+      }
+
+      let newUser = {
+        name: $(),
+        scores: score_arr
+      };
+
+      // $.post("")
+      // pop up modale
+
+    });
+  </script>
+
+</body>
+
+</html>

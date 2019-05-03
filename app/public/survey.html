@@ -43,12 +43,12 @@
 
   <!-- CONTENT -->
   <div class="container">
-
+    <br><br>
     <form>
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="user_name">Username:</label>
-          <input type="text" class="form-control" id="user_name" placeholder="First name" required>
+          <input type="text" class="form-control" id="user_name" placeholder="otaku_123" required>
           <div class="valid-feedback">
             Looks good!
           </div>
@@ -57,13 +57,15 @@
         <!-- MAYBE PHASE II. -->
         <!-- SERVE THEM THE PAIRE GENRE AND AN IMAGE OF THE PEOPLE WHO ALSO GOT PAIRED WITH GENRE -->
         <div class="col-md-8 mb-3">
-          <label for="pic_url">Avatar URL</label>
-          <input type="text" class="form-control" id="avatar_link" placeholder="Last name" required>
+          <label for="pic_url">Avatar URL:</label>
+          <input type="text" class="form-control" id="avatar_link"
+            placeholder="https://avatarfiles.alphacoders.com/177/177170.jpg" required>
           <div class="valid-feedback">
             Looks good!
           </div>
         </div>
       </div>
+      <br>
       <!-- Question 1 -->
       <select class="custom-select" id="q1">
         <option selected>How much anime have you watched previously?</option>
@@ -229,34 +231,77 @@
 
         $.get("/api/users", function (data) {
           console.log(data);
-          for (let i = 0; i < data.length; i++) {
-            let user_name = data[i].name;
-            let user_avatar = data[i].avatar;
-            let user_scores = data[i].scores;
-            for (let i = 0; i < user_score.length; i++) {
-              // compare score_arr with all the arrays
-              // return a match
-            };
-          };
+          // for (let i = 0; i < data.length; i++) {
+          //   let user_name = data[i].name;
+          //   let user_avatar = data[i].avatar;
+          //   let user_scores = data[i].scores;
+          //   for (let i = 0; i < user_scores.length; i++) {
+          //     // compare score_arr with all the arrays
+          //     // return a match
+          //   };
+          // };
         });
+
+        // an array of objects to hold the matches with all the info,
+        // INCLUDING the total match score. (to be interated over after)...
+        let pre_match_array = [];
 
         $.get("/api/genres", function (data) {
           console.log(data);
           for (let i = 0; i < data.length; i++) {
+
             let genre_name = data[i].genre;
             let example_vid = data[i].video;
             let genre_link = data[i].link;
             let genre_desc = data[i].description;
             let genre_scores = data[i].scores;
+
+            let this_diff_arr = [];
+
             for (let i = 0; i < genre_scores.length; i++) {
+
               // compare score_arr with all the arrays
-              // return a match  
+              // return a match
+              let diff = Math.abs(score_arr[i] - genre_scores[i]);
+              this_diff_arr.push(diff);
+              console.log(diff);
+
             };
+
+            // KEY PART THAT USES THE REDUCE METHOD TO GET THE TOTAL DIFFERENCE
+            // need to create an object now that pulls in on the above if and returns
+            // the lowest number...if more than one category exists alert them but only
+            // show the first match...maybe pull in all the matches as a link?
+
+            let calc_diff = this_diff_arr.reduce((a, b) => a + b, 0);
+            let pre_match = {
+              genre: genre_name,
+              video: example_vid,
+              link: genre_link,
+              description: genre_desc,
+              difference_score: calc_diff
+            }
+
+            pre_match_array.push(pre_match);
+            // console.log(this_diff_arr);
           };
+          console.log(pre_match_array);
+
+          let num = 1000;
+          for (let i = 0; i < pre_match_array.length; i++) {
+            let check_score = pre_match_array[i].difference_score;
+            if (check_score < num) {
+              num = check_score
+            } else {
+              url = pre_match_array[i].video
+              $("#modalVideo").attr('src', url);
+              $("#anime_modal").modal('show');
+
+
+            }
+
+          }
         });
-
-        $("#anime_modal").modal('show');
-
       });
 
       $("#close_it").on("click", function (e) {

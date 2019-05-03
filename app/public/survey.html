@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Anime Finder</title>
+  <!-- <link rel="stylesheet" href="../css/style.css"> -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery.js"></script>
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
@@ -16,17 +18,13 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/style.css">
-  <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 
 <body>
 
   <!-- NAV -->
   <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="home.html">Anime Finder</a>
+    <a class="navbar-brand" href="/home">Anime Finder</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -34,10 +32,10 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="survey.html">Questionnaire</a>
+          <a class="nav-link" href="/survey">Questionnaire</a>
         </li>
       </ul>
     </div>
@@ -58,13 +56,13 @@
         <!-- I COULD PAIR USERS TOGETHER IF THEIR GENRE MATCHES -->
         <!-- MAYBE PHASE II. -->
         <!-- SERVE THEM THE PAIRE GENRE AND AN IMAGE OF THE PEOPLE WHO ALSO GOT PAIRED WITH GENRE -->
-        <!-- <div class="col-md-8 mb-3">
-          <label for="pic_url">Image URL</label>
-          <input type="text" class="form-control" id="pic_url" placeholder="Last name" required>
+        <div class="col-md-8 mb-3">
+          <label for="pic_url">Avatar URL</label>
+          <input type="text" class="form-control" id="avatar_link" placeholder="Last name" required>
           <div class="valid-feedback">
             Looks good!
           </div>
-        </div> -->
+        </div>
       </div>
       <!-- Question 1 -->
       <select class="custom-select" id="q1">
@@ -166,60 +164,112 @@
         <option value="5">5 (very accurate)</option>
       </select>
       <br><br>
-
-
       <button type="submit" class="btn btn-primary" id="submit_Q">Submit</button>
+
     </form>
 
   </div>
 
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="anime_modal" role="dialog">
     <div class="modal-dialog">
-
-      <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" id="match_found"></h4>
+          <h4 class="modal-title" id="match_found">
+            <!-- ANIME GENRE PUSHED HERE -->
+          </h4>
         </div>
         <div class="modal-body">
-          <div id="match_picture">
-
-
-          </div>
-          <div id="match_info">
-
-          </div>
-          <div id="match_link">
-
-          </div>
+          <a href="">
+            <!-- LINK TO ANIME GENRE PUSHED HERE -->
+          </a>
+          <iframe id="modalVideo" width="560" height="315" src="" frameborder='0' allowfullscreen>
+            <!-- VIDEO PUSHED HERE use jQuery to change src -->
+          </iframe>
+          <p id="description">
+            <!-- DESCRIPTION PUSHED HERE -->
+          </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" id="close_it">Close</button>
         </div>
       </div>
-
     </div>
-
   </div>
 
-  <script>
-    $("#submit_Q").on("click", function (e) {
-      e.preventDefault();
+  <script type="text/javascript">
+    $(document).ready(function () {
 
       let score_arr = [];
+      let avatar_link = "";
+      let url = $("#modalVideo").attr('src');
 
-      for (let i = 0; i < 10; i++) {
-        score_arr.push($());
-      }
+      $("#submit_Q").on("click", function (e) {
+        e.preventDefault();
 
-      let newUser = {
-        name: $(),
-        scores: score_arr
-      };
+        for (let i = 1; i < 11; i++) {
+          let score = $(`#q${i}`)[0].value;
+          let int_score = parseInt(score);
+          score_arr.push(int_score);
+        };
 
-      // $.post("")
-      // pop up modale
+        let newUser = {
+          name: $("#user_name").val().trim(),
+          avatar: $("#avatar_link").val().trim(),
+          scores: score_arr
+        };
+        // console.log(newUser)
+        // $.post("")
+        // pop up modale
+        $.post("/api/users", newUser, function () {
+          $("#avatar_link").val("");
+          $("#user_name").val("");
+        });
+
+
+        $.get("/api/users", function (data) {
+          console.log(data);
+          for (let i = 0; i < data.length; i++) {
+            let user_name = data[i].name;
+            let user_avatar = data[i].avatar;
+            let user_scores = data[i].scores;
+            for (let i = 0; i < user_score.length; i++) {
+              // compare score_arr with all the arrays
+              // return a match
+            };
+          };
+        });
+
+        $.get("/api/genres", function (data) {
+          console.log(data);
+          for (let i = 0; i < data.length; i++) {
+            let genre_name = data[i].genre;
+            let example_vid = data[i].video;
+            let genre_link = data[i].link;
+            let genre_desc = data[i].description;
+            let genre_scores = data[i].scores;
+            for (let i = 0; i < genre_scores.length; i++) {
+              // compare score_arr with all the arrays
+              // return a match  
+            };
+          };
+        });
+
+        $("#anime_modal").modal('show');
+
+      });
+
+      $("#close_it").on("click", function (e) {
+        $("#anime_modal").modal('hide');
+      })
+
+      $("#anime_modal").on('hide.bs.modal', function () {
+        $("#modalVideo").attr('src', '');
+      });
+
+      $("#anime_modal").on('show.bs.modal', function () {
+        $("#modalVideo").attr('src', url);
+      });
 
     });
   </script>

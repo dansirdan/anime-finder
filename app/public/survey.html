@@ -183,10 +183,6 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <a href="" id="myAnimeList_link">
-
-            <!-- LINK TO ANIME GENRE PUSHED HERE -->
-          </a>
           <div class="embed-responsive embed-responsive-16by9">
             <iframe id="modalVideo" class="embed-responsive-item" src="" frameborder='0' allowfullscreen>
               <!-- VIDEO PUSHED HERE use jQuery to change src -->
@@ -195,6 +191,7 @@
           <p id="description">
             <!-- DESCRIPTION PUSHED HERE -->
           </p>
+          <a class="btn btn-primary" href="" id="myAnimeList_link" role="button" target="_blank">More Info</a>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" id="close_it">Close</button>
@@ -224,9 +221,7 @@
           avatar: $("#avatar_link").val().trim(),
           scores: score_arr
         };
-        // console.log(newUser)
-        // $.post("")
-        // pop up modale
+
         $.post("/api/users", newUser, function () {
           $("#avatar_link").val("");
           $("#user_name").val("");
@@ -251,7 +246,6 @@
         let pre_match_array = [];
 
         $.get("/api/genres", function (data) {
-          console.log(data);
           for (let i = 0; i < data.length; i++) {
 
             let genre_name = data[i].genre;
@@ -264,11 +258,8 @@
 
             for (let i = 0; i < genre_scores.length; i++) {
 
-              // compare score_arr with all the arrays
-              // return a match
               let diff = Math.abs(score_arr[i] - genre_scores[i]);
               this_diff_arr.push(diff);
-              console.log(diff);
 
             };
 
@@ -284,13 +275,10 @@
               link: genre_link,
               description: genre_desc,
               difference_score: calc_diff
-            }
-
+            };
             pre_match_array.push(pre_match);
-            // console.log(this_diff_arr);
           };
-          console.log(pre_match_array);
-
+          // FOR LOOP TO FIND THE LOWEST DIFF SCORE OF THE OBJECTS(so I could use the lowest score to bring in all my stuff)
           let lowest = Number.POSITIVE_INFINITY;
           let tmp;
           for (let i = pre_match_array.length - 1; i >= 0; i--) {
@@ -300,18 +288,20 @@
             };
           };
 
-          console.log(lowest);
-
           for (let i = 0; i < pre_match_array.length; i++) {
+
             let check = pre_match_array[i].difference_score;
+
             if (check === lowest) {
+
               url = pre_match_array[i].video
               $("#modalVideo").attr('src', url);
               $("#match_found").html(pre_match_array[i].genre);
               $("#description").html(pre_match_array[i].description);
-              $("myAnimeList_link").attr('href', pre_match_array[i].link)
+              $("myAnimeList_link").attr('href', (pre_match_array[i].link));
               $("#anime_modal").modal('show');
               return;
+
             };
           };
         });
